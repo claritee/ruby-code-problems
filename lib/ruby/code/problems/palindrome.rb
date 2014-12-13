@@ -1,30 +1,45 @@
 module Ruby::Code::Problems
   class Palindrome
     INPUT_PARTS = 2
+    END_OF_RANGE = 9
 
     def find_next(input)
-      digits = "#{input}".split("").map { |digit| digit.to_i }
-      left = left_half(digits)
-      right = right_half(digits)
-      if left < right
-        merge(left + 1, left + 1, digits.count)
+      digits = to_array(input).map { |digit| digit.to_i }
+      leftVal = left_half(digits, digits.count)
+      rightVal = right_half(digits, digits.count)
+
+      if leftVal < rightVal
+        merge(leftVal + 1, leftVal + 1, digits.count)
+      elsif leftVal == rightVal
+        if end_of_range?(leftVal)
+          leftVal += 1
+          leftArr = to_array(leftVal)
+          rightVal = leftArr.first(leftArr.count - 1).join
+        else
+          leftVal += 1
+          rightVal = leftVal
+        end
+        merge(leftVal, rightVal, digits.count)
+      else
+        merge(leftVal, leftVal, digits.count)
       end
     end
 
     private
 
-    def left_half(input)
-      input[0..(mid(input)-1)].join.to_i
+
+    def to_array(input)
+      input.to_s.split('')
     end
 
-    def right_half(input)
-      mid = mid(input)
-      input[mid..(input.count - 1)].join.to_i
+    def left_half(input, length)
+      end_pos = (length % INPUT_PARTS == 0) ? length/INPUT_PARTS - 1 : length/INPUT_PARTS
+      input[0..end_pos].join.to_i
     end
 
-    def mid(input)
-      length = input.count
-      (length % INPUT_PARTS == 0) ? length/INPUT_PARTS : length/INPUT_PARTS
+    def right_half(input, length)
+      start_pos = input.count % INPUT_PARTS == 0 ? length/INPUT_PARTS : length/INPUT_PARTS - 1
+      input[start_pos..(input.count - 1)].join.to_i
     end
 
     def merge(left, right, length)
@@ -32,7 +47,11 @@ module Ruby::Code::Problems
     end
 
     def reverse(input, length)
-      (length % 2 == 0) ? "#{input}".reverse : "#{input}".slice(1, input.count - 1).reverse
+      (length % INPUT_PARTS == 0) ? input.to_s.reverse : input.to_s.reverse.slice(1, input.to_s.length - 1)
+    end
+
+    def end_of_range?(leftVal)
+      leftVal % END_OF_RANGE == 0
     end
   end
 end
