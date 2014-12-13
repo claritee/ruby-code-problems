@@ -1,4 +1,4 @@
-# Ruby::Code::Problems
+# Problems
 
 Code repo containing code problems
 
