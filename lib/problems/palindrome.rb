@@ -50,6 +50,7 @@ module Problems
       right_val = right_half(digits, length)
       right_reversed = right_val.to_s.reverse.to_i
 
+      binding.pry
       if left_val < right_reversed
         merge(left_val + 1, left_val + 1, length)
       elsif left_val == right_reversed

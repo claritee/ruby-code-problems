@@ -1,6 +1,6 @@
 # Ruby::Code::Problems
 
-TODO: Write a gem description
+Code repo containing code problems
 
 ## Installation
 
@@ -18,7 +18,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    rake install
+    bin/run_next_palindrome.rb
+
+Example:
+
+    bin/run_next_palindrome.rb
+    Enter a number to find the next palindrome
+    500
+    => 505
 
 ## Contributing
 
