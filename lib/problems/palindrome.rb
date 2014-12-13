@@ -4,7 +4,7 @@
 #
 #   Palidrome.new.find_next(11)
 #   # => 22
-module Ruby::Code::Problems
+module Problems
   class Palindrome
     INPUT_PARTS = 2
     END_OF_RANGE = 9
