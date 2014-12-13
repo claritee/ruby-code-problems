@@ -5,23 +5,23 @@ module Ruby::Code::Problems
 
     def find_next(input)
       digits = to_array(input).map { |digit| digit.to_i }
-      leftVal = left_half(digits, digits.count)
-      rightVal = right_half(digits, digits.count)
+      left_val = left_half(digits, digits.count)
+      right_val = right_half(digits, digits.count)
 
-      if leftVal < rightVal
-        merge(leftVal + 1, leftVal + 1, digits.count)
-      elsif leftVal == rightVal
-        if end_of_range?(leftVal)
-          leftVal += 1
-          leftArr = to_array(leftVal)
-          rightVal = leftArr.first(leftArr.count - 1).join
+      if left_val < right_val
+        merge(left_val + 1, left_val + 1, digits.count)
+      elsif left_val == right_val
+        if end_of_range?(left_val)
+          left_val += 1
+          left_arr = to_array(left_val)
+          right_val = left_arr.first(left_arr.count - 1).join
         else
-          leftVal += 1
-          rightVal = leftVal
+          left_val += 1
+          right_val = left_val
         end
-        merge(leftVal, rightVal, digits.count)
+        merge(left_val, right_val, digits.count)
       else
-        merge(leftVal, leftVal, digits.count)
+        merge(left_val, left_val, digits.count)
       end
     end
 
@@ -38,8 +38,8 @@ module Ruby::Code::Problems
     end
 
     def right_half(input, length)
-      start_pos = input.count % INPUT_PARTS == 0 ? length/INPUT_PARTS : length/INPUT_PARTS - 1
-      input[start_pos..(input.count - 1)].join.to_i
+      start_pos = input.count % INPUT_PARTS == 0 ? length/INPUT_PARTS - 1 : length/INPUT_PARTS
+      input[start_pos..(length - 1)].join.to_i
     end
 
     def merge(left, right, length)
