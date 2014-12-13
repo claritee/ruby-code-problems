@@ -11,6 +11,7 @@ describe Problems::Palindrome do
     it { expect(palindrome.find_next(98)).to eq 99 }
     it { expect(palindrome.find_next(512)).to eq 515 }
     it { expect(palindrome.find_next(570)).to eq 575 }
+    it { expect(palindrome.find_next(1009)).to eq 1111 }
     it { expect(palindrome.find_next(8999)).to eq 9009 }
     it { expect(palindrome.find_next(12345)).to eq 12421 }
   end
